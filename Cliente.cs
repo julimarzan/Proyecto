@@ -5,9 +5,12 @@ public class Cliente : Persona, IInscribible {
     
     public Cliente(string nombre, int edad, double peso, double altura, Membresia membresia)
         : base(nombre, edad) {
+        if (peso <= 0 || altura <= 0)
+            throw new ArgumentException("El peso y la altura deben ser mayores a 0.");
+        
         Peso = peso;
         Altura = altura;
-        Membresia = membresia;
+        Membresia = membresia ?? throw new ArgumentNullException("La membresía no puede ser nula.");
     }
     
     public void Inscribirse() {
